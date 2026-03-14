@@ -4,6 +4,6 @@ numpy
 pymongo
 certifi
 pymongo[srv]==3.12
-pymongo.server_api
-pymongo.mongo_client
+scikit-learn
+
 ##-e .
