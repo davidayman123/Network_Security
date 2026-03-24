@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/mlops_project/NetworkSecurity/mlruns/0/be3821dc867d4ac9b2009cd48bacb44e/artifacts
+end_time: 1774383070479
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: be3821dc867d4ac9b2009cd48bacb44e
+run_name: bright-asp-752
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774383059061
+status: 3
+tags: []
+user_id: david

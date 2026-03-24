@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/mlops_project/NetworkSecurity/mlruns/0/1d53e12800be4a0aa2d87c1fe430aea6/artifacts
+end_time: 1774383059003
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1d53e12800be4a0aa2d87c1fe430aea6
+run_name: treasured-perch-918
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774383041311
+status: 3
+tags: []
+user_id: david

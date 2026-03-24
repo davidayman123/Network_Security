@@ -1,0 +1,21 @@
+[2026-03-24 22:04:10] 16 root - INFO - Starting the data ingestion component
+[2026-03-24 22:04:42] 88 root - WARNING - MongoDB TLS handshake failed. Falling back to local dataset. Original error: SSL handshake failed: ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),SSL handshake failed: ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),SSL handshake failed: ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30.0s, Topology Description: <TopologyDescription id: 69c2ee3b58e5f0c3f2c1a8d4, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qklrv98-shard-00-00.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-01.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-02.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[2026-03-24 22:04:42] 41 root - INFO - Loading fallback dataset from local path: Network_Data\phisingData.csv
+[2026-03-24 22:04:42] 113 root - INFO - Performed train test split on the dataframe
+[2026-03-24 22:04:42] 115 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2026-03-24 22:04:42] 123 root - INFO - Exporting train and test file path.
+[2026-03-24 22:04:42] 132 root - INFO - Exported train and test file path.
+[2026-03-24 22:04:42] 18 root - INFO - Data ingestion component completed
+[2026-03-24 22:04:42] 22 root - INFO - Starting the data validation component
+[2026-03-24 22:04:42] 30 root - INFO - Required number of columns: 31
+[2026-03-24 22:04:42] 31 root - INFO - Dataframe has columns: 31
+[2026-03-24 22:04:42] 30 root - INFO - Required number of columns: 31
+[2026-03-24 22:04:42] 31 root - INFO - Dataframe has columns: 31
+[2026-03-24 22:04:43] 24 root - INFO - Data validation component completed
+[2026-03-24 22:04:43] 27 root - INFO - Starting the data transformation component
+[2026-03-24 22:04:43] 57 root - INFO - Entered initiate_data_transformation method of DataTransformation class
+[2026-03-24 22:04:43] 59 root - INFO - Starting data transformation
+[2026-03-24 22:04:43] 42 root - INFO - Entered get_data_trnasformer_object method of Trnasformation class
+[2026-03-24 22:04:43] 47 root - INFO - Initialise KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[2026-03-24 22:04:43] 30 root - INFO - Data transformation component completed
+[2026-03-24 22:04:43] 32 root - INFO - Starting the model trainer component

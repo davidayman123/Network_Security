@@ -11,18 +11,60 @@ import sys
 import numpy as np
 import pandas as pd
 import pymongo
+import certifi
 from typing import List
 from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv
+from pymongo.errors import ServerSelectionTimeoutError
 load_dotenv()
 
 MONGO_DB_URL=os.getenv("MONGO_DB_URL")
+FALLBACK_CSV_PATH=os.getenv("DATA_INGESTION_FALLBACK_CSV", os.path.join("Network_Data", "phisingData.csv"))
 
 
 class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig):
         try:
             self.data_ingestion_config=data_ingestion_config
+        except Exception as e:
+            raise NetworkSecurityException(e,sys)
+
+    def _load_local_backup_dataframe(self) -> pd.DataFrame:
+        """Load a local CSV when MongoDB is unavailable."""
+        try:
+            if not os.path.exists(FALLBACK_CSV_PATH):
+                raise FileNotFoundError(
+                    f"Fallback dataset not found at: {FALLBACK_CSV_PATH}. "
+                    "Set DATA_INGESTION_FALLBACK_CSV to a valid CSV path."
+                )
+
+            logging.info(f"Loading fallback dataset from local path: {FALLBACK_CSV_PATH}")
+            df = pd.read_csv(FALLBACK_CSV_PATH)
+            if "_id" in df.columns.to_list():
+                df = df.drop(columns=["_id"], axis=1)
+            df.replace({"na": np.nan}, inplace=True)
+            print("Shape of fallback dataset", df.shape)
+            return df
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+
+    def _get_mongo_client(self) -> pymongo.MongoClient:
+        """Create a Mongo client with explicit CA certs for Atlas TLS handshakes."""
+        try:
+            if not MONGO_DB_URL:
+                raise ValueError("MONGO_DB_URL is not set. Add it to your environment or .env file.")
+
+            client = pymongo.MongoClient(
+                MONGO_DB_URL,
+                tls=True,
+                tlsCAFile=certifi.where(),
+                serverSelectionTimeoutMS=30000,
+                retryWrites=True,
+            )
+            client.admin.command("ping")
+            return client
+        except ServerSelectionTimeoutError:
+            raise
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
@@ -33,7 +75,7 @@ class DataIngestion:
         try:
             database_name=self.data_ingestion_config.database_name
             collection_name=self.data_ingestion_config.collection_name
-            self.mongo_client=pymongo.MongoClient(MONGO_DB_URL)
+            self.mongo_client=self._get_mongo_client()
             collection=self.mongo_client[database_name][collection_name]
 
             df=pd.DataFrame(list(collection.find()))
@@ -42,6 +84,12 @@ class DataIngestion:
             print("Shape of original dataset",df.shape)
             df.replace({"na":np.nan},inplace=True)
             return df
+        except ServerSelectionTimeoutError as e:
+            logging.warning(
+                "MongoDB TLS handshake failed. Falling back to local dataset. "
+                f"Original error: {e}"
+            )
+            return self._load_local_backup_dataframe()
         except Exception as e:
             raise NetworkSecurityException(e,sys)
         
