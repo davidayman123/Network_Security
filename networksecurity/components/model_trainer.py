@@ -51,6 +51,10 @@ class ModelTrainer:
             mlflow.log_metric("precision",precision_score)
             mlflow.log_metric("recall_score",recall_score)
             mlflow.sklearn.log_model(best_model,"model")
+            
+            # Log additional file artifacts if available
+            if os.path.exists("final_model/model.pkl"):
+                mlflow.log_artifact("final_model/model.pkl")
             # Model registry does not work with file store
             # if tracking_url_type_store != "file":
 
@@ -115,14 +119,9 @@ class ModelTrainer:
 
         classification_train_metric=get_classification_score(y_true=y_train,y_pred=y_train_pred)
         
-        ## Track the experiements with mlflow
-        self.track_mlflow(best_model,classification_train_metric)
-
-
         y_test_pred=best_model.predict(x_test)
         classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
 
-        self.track_mlflow(best_model,classification_test_metric)
 
         preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
             
@@ -132,7 +131,11 @@ class ModelTrainer:
         Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
         save_object(self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
         #model pusher
+        os.makedirs("final_model", exist_ok=True)
         save_object("final_model/model.pkl",best_model)
+
+        self.track_mlflow(best_model,classification_train_metric)
+        self.track_mlflow(best_model,classification_test_metric)
         
 
         ## Model Trainer Artifact

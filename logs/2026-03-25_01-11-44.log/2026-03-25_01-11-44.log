@@ -1,0 +1,29 @@
+[2026-03-25 01:11:52] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-03-25 01:11:52] 107 dagshub - INFO - Accessing as davidayman123
+[2026-03-25 01:11:53] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/davidayman123/Network_Security "HTTP/1.1 200 OK"
+[2026-03-25 01:11:54] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-03-25 01:11:54] 107 dagshub - INFO - Initialized MLflow to track repo "davidayman123/Network_Security"
+[2026-03-25 01:11:54] 107 dagshub - INFO - Repository davidayman123/Network_Security initialized!
+[2026-03-25 01:11:54] 16 root - INFO - Starting the data ingestion component
+[2026-03-25 01:12:26] 88 root - WARNING - MongoDB TLS handshake failed. Falling back to local dataset. Original error: SSL handshake failed: ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),SSL handshake failed: ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),SSL handshake failed: ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30.0s, Topology Description: <TopologyDescription id: 69c31a3bd1332149bdcfe8b7, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qklrv98-shard-00-00.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-01.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-02.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('SSL handshake failed: ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: [SSL: TLSV1_ALERT_INTERNAL_ERROR] tlsv1 alert internal error (_ssl.c:1028) (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[2026-03-25 01:12:26] 41 root - INFO - Loading fallback dataset from local path: Network_Data\phisingData.csv
+[2026-03-25 01:12:26] 113 root - INFO - Performed train test split on the dataframe
+[2026-03-25 01:12:26] 115 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2026-03-25 01:12:26] 123 root - INFO - Exporting train and test file path.
+[2026-03-25 01:12:26] 132 root - INFO - Exported train and test file path.
+[2026-03-25 01:12:26] 18 root - INFO - Data ingestion component completed
+[2026-03-25 01:12:26] 22 root - INFO - Starting the data validation component
+[2026-03-25 01:12:26] 30 root - INFO - Required number of columns: 31
+[2026-03-25 01:12:26] 31 root - INFO - Dataframe has columns: 31
+[2026-03-25 01:12:26] 30 root - INFO - Required number of columns: 31
+[2026-03-25 01:12:26] 31 root - INFO - Dataframe has columns: 31
+[2026-03-25 01:12:27] 24 root - INFO - Data validation component completed
+[2026-03-25 01:12:27] 27 root - INFO - Starting the data transformation component
+[2026-03-25 01:12:27] 57 root - INFO - Entered initiate_data_transformation method of DataTransformation class
+[2026-03-25 01:12:27] 59 root - INFO - Starting data transformation
+[2026-03-25 01:12:27] 42 root - INFO - Entered get_data_trnasformer_object method of Trnasformation class
+[2026-03-25 01:12:27] 47 root - INFO - Initialise KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[2026-03-25 01:12:27] 30 root - INFO - Data transformation component completed
+[2026-03-25 01:12:27] 32 root - INFO - Starting the model trainer component
+[2026-03-25 01:18:15] 146 root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\03_25_2026_01_11_45\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9915693245302184, precision_score=0.9892582083502229, recall_score=0.9938912645082468), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9720670391061452, precision_score=0.9666666666666667, recall_score=0.9775280898876404))
+[2026-03-25 01:18:15] 36 root - INFO - Model trainer component completed
