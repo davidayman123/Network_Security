@@ -1,0 +1,24 @@
+[2026-04-08 17:30:53] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-04-08 17:30:53] 107 dagshub - INFO - Accessing as davidayman123
+[2026-04-08 17:30:54] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/davidayman123/Network_Security "HTTP/1.1 200 OK"
+[2026-04-08 17:30:56] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-04-08 17:30:56] 107 dagshub - INFO - Initialized MLflow to track repo "davidayman123/Network_Security"
+[2026-04-08 17:30:56] 107 dagshub - INFO - Repository davidayman123/Network_Security initialized!
+[2026-04-08 17:31:21] 42 root - INFO - Start data Ingestion
+[2026-04-08 17:31:53] 88 root - WARNING - MongoDB TLS handshake failed. Falling back to local dataset. Original error: ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms),ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30.0s, Topology Description: <TopologyDescription id: 69d674ca5444aa44a19cb7ab, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qklrv98-shard-00-00.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-qklrv98-shard-00-00.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-01.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-qklrv98-shard-00-01.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>, <ServerDescription ('ac-qklrv98-shard-00-02.nqugzjv.mongodb.net', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('ac-qklrv98-shard-00-02.nqugzjv.mongodb.net:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[2026-04-08 17:31:53] 41 root - INFO - Loading fallback dataset from local path: Network_Data\phisingData.csv
+[2026-04-08 17:31:53] 113 root - INFO - Performed train test split on the dataframe
+[2026-04-08 17:31:53] 115 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2026-04-08 17:31:53] 123 root - INFO - Exporting train and test file path.
+[2026-04-08 17:31:53] 132 root - INFO - Exported train and test file path.
+[2026-04-08 17:31:53] 45 root - INFO - Data Ingestion completed and artifact: DataIngestionArtifact(trained_file_path='Artifacts\\04_08_2026_17_30_46\\data_ingestion\\ingested\\train.csv', test_file_path='Artifacts\\04_08_2026_17_30_46\\data_ingestion\\ingested\\test.csv')
+[2026-04-08 17:31:53] 55 root - INFO - Initiate the data Validation
+[2026-04-08 17:31:53] 30 root - INFO - Required number of columns: 31
+[2026-04-08 17:31:53] 31 root - INFO - Dataframe has columns: 31
+[2026-04-08 17:31:53] 30 root - INFO - Required number of columns: 31
+[2026-04-08 17:31:53] 31 root - INFO - Dataframe has columns: 31
+[2026-04-08 17:31:54] 57 root - INFO - Entered initiate_data_transformation method of DataTransformation class
+[2026-04-08 17:31:54] 59 root - INFO - Starting data transformation
+[2026-04-08 17:31:54] 42 root - INFO - Entered get_data_trnasformer_object method of Trnasformation class
+[2026-04-08 17:31:54] 47 root - INFO - Initialise KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[2026-04-08 17:39:18] 148 root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\04_08_2026_17_30_46\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9910291301280113, precision_score=0.9887369267900241, recall_score=0.9933319862598505), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9750102417042196, precision_score=0.9651257096512571, recall_score=0.9850993377483444))
